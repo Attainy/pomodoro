@@ -44,13 +44,14 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  
 }
 
 /* 내부 원 */
 .clock__inner-1, .clock__inner-2 {
   width: 90%;
   aspect-ratio: 1/1;
-  /* border: 1px solid var(--clockBorder); */
   border-radius: 50%;
   position: absolute;
   background-color: var(--clockBackGround);
@@ -62,7 +63,7 @@ h1 {
   z-index: 3;
 }
 
-/* 눈금 */
+/* 고정 눈금 */
 .clock__scale-line {
   height: 95%;
   border: 1px solid black;
@@ -71,16 +72,39 @@ h1 {
 }
 
 
-/* animation: 1s rota; */
 
-/* 
-@keyframes rota {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+
+.moving-circle {
+  width: 70%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+
+  /* stroke-dasharray: 600;
+  stroke-dashoffset: 600; */
+  transform: rotate(-90deg);
+  /* animation: ani 60s linear; */
+  z-index: 10;
 }
 
-@keyframes opa {
-  0% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-} */
+@keyframes ani {
+  from {
+    stroke-dashoffset: 100;  /*500지점부터 svg가 나타남*/
+  }
+  to {
+    stroke-dashoffset: 600;   /*0지점부터 svg가 나타남*/
+  }
+}
 
+
+/* 움직이는 눈금 */
+.clock__hand {
+  height: 50%;
+  border: 1px solid red;
+  position: absolute;
+  top: 0;
+
+  transition: transform 1s linear;
+  transform-origin: 100% 100%;
+  transform: rotate(-360deg);
+  z-index: 5;
+}

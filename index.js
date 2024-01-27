@@ -1,9 +1,5 @@
-/* 시계 눈금 */
-// const scaleWidth = clockBorder.clientWidth / 2;
-// const clockScaleDiv = document.querySelector('.clock__scale');
+/* 시계 고정 눈금 */
 const clockScaleDiv = document.querySelector('.clock__circle');
-
-
 for (let i=0; i<60; i++) {
   let clockScale = document.createElement('div');
   clockScale.classList = 'clock__scale-line';
@@ -13,3 +9,21 @@ for (let i=0; i<60; i++) {
 }
 
 
+/* 타이머 애니메이션 등록 */
+const markLength = document.querySelector('.moving-circle path').getTotalLength();
+let startPoint = markLength/4
+
+let animation = {
+  keyframes: [
+    {strokeDashoffset: startPoint},
+    {strokeDashoffset: markLength}
+  ],
+  options: {
+    duration: 6000,
+    easing: "linear",
+  },
+}
+
+const movingCircle = document.querySelector('.moving-circle')
+movingCircle.style = `stroke-dasharray: ${markLength}; stroke-dashoffset: ${markLength};`
+movingCircle.animate(animation.keyframes, animation.options);
