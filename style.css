@@ -5,6 +5,7 @@ html, body, main {
 :root {
   --clockBorder: black;
   --clockBackGround: white;
+  --lastHandColor: red;
 }
 
 /* header */
@@ -15,19 +16,48 @@ h1 {
 /* 타이머 세팅 */
 .setting {
   display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.setting__time-butons {
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+button {
+  background-color: #fa5a5a;
+  color: white;
+  margin: 5px;
+  padding: 8px 18px;  
+  font-size: 14px;
+  box-shadow:0px 4px 0px #E04342;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+button:active {
+  box-shadow: 0 0 #ff4c4b; background-color: #ff4c4b;
+}
+
+.ani-stop {
+  animation-play-state:paused;
 }
 
 /* 시계 */
 .clock {
-  width: 80%;
-  height: 80%;
+  width: 40%;
+  aspect-ratio: 1/1;
   margin: 0 auto;
-  /* border: 1px solid var(--clockBorder); */
-
+  border: 1px solid var(--clockBorder);
+  border-radius: 50px;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +65,7 @@ h1 {
 
 /* 외부 원 */
 .clock__circle {
-  width: 50%;
+  width: 90%;
   aspect-ratio: 1/1;
   border: 1px solid var(--clockBorder);
   border-radius: 50%;
@@ -44,8 +74,6 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  
 }
 
 /* 내부 원 */
@@ -61,6 +89,8 @@ h1 {
 .clock__inner-2 {
   width: 80%;
   z-index: 3;
+  /* background-color: pink; */
+  /* animation: pulse 2s infinite; */
 }
 
 /* 고정 눈금 */
@@ -71,40 +101,41 @@ h1 {
   top: 2.5%;
 }
 
-
-
-
-.moving-circle {
-  width: 70%;
+.progress__bar {
+  width: 75%;
   aspect-ratio: 1/1;
-  border-radius: 50%;
-
-  /* stroke-dasharray: 600;
-  stroke-dashoffset: 600; */
-  transform: rotate(-90deg);
-  /* animation: ani 60s linear; */
-  z-index: 10;
-}
-
-@keyframes ani {
-  from {
-    stroke-dashoffset: 100;  /*500지점부터 svg가 나타남*/
-  }
-  to {
-    stroke-dashoffset: 600;   /*0지점부터 svg가 나타남*/
-  }
-}
-
-
-/* 움직이는 눈금 */
-.clock__hand {
-  height: 50%;
-  border: 1px solid red;
   position: absolute;
-  top: 0;
-
-  transition: transform 1s linear;
-  transform-origin: 100% 100%;
-  transform: rotate(-360deg);
+  border-radius: 50%;
   z-index: 5;
+
+}
+
+.progress__hand {
+  position: absolute;
+  width: 1px;
+  height: calc(50%);
+  top: 0; 
+  left: calc(50% - 1px / 2);
+  background: rgb(255, 57, 50);
+  z-index: 5;
+  transform-origin: bottom;
+}
+
+.progress__hand:last-child {
+  background-color: var(--lastHandColor);
+}
+
+.progress-number {
+  width: 30%;
+  aspect-ratio: 1/1;
+  position: absolute;
+  border-radius: 50%;
+  background-color: pink;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  z-index: 7;
 }

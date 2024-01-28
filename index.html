@@ -14,9 +14,15 @@
   <main>
     <!-- 세팅 -->
     <div class="setting">
-      <input type="number" />
-      <button>+ 10</button>
-      <button>+ 15</button>
+      <div class="setting__time-butons">
+        <input type="number" placeholder="시간(분)을 입력하세요"/>
+        <button>+ 10</button>
+        <button>+ 15</button>
+      </div>
+      <div class="setting__active-buttons">
+        <button class="start" type="submit">Start</button>
+        <button class="reset">Reset</button>
+      </div>
     </div>
 
     <!-- 시계 -->
@@ -25,13 +31,20 @@
         <!-- 내부 원 -->
         <div class="clock__inner-1"></div>
         <div class="clock__inner-2"></div>
-        <!-- 움직이는 눈금 -->
-        <svg class="moving-circle" viewBox="0 0 168 168" fill="white" xmlns="http://www.w3.org/2000/svg">
-          <path d="M163 84C163 127.63 127.63 163 84 163C40.3695 163 5 127.63 5 84C5 40.3695 40.3695 5 84 5C127.63 5 163 40.3695 163 84Z" stroke="red" stroke-width="70%"/>
-        </svg>
+
+
+        <!-- 남은 시간 시각적 표시 -->
+        <div class="progress__bar"></div>
+        <!-- <div class="fins"></div> -->
+        <!-- <div class="clock__hand"></div>  -->
+
+        <!-- 남은 시간 숫자로 표시 -->
+        <div class="progress-number">00 : 00</div>
       </div>
+
     </div>
   </main>
+  
   <script src="./index.js"></script>
 </body>
 </html>
