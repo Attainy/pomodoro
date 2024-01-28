@@ -14,10 +14,15 @@
   <main>
     <!-- 세팅 -->
     <div class="setting">
-      <div class="setting__time-butons">
-        <input type="number" placeholder="시간(분)을 입력하세요"/>
-        <button>+ 10</button>
-        <button>+ 15</button>
+      <div class="setting__time">
+        <button class="up-0">0</button>
+        <button class="up-5">+ 5</button>
+        <div class="setting__time-input">
+          <input type="number" name="set-time" placeholder="분" min="0" max="60"/>
+          <!-- <input type="number" name="set-time" placeholder="초"/> -->
+        </div>
+        <button class="up-10">+ 10</button>
+        <button class="up-15">+ 15</button>
       </div>
       <div class="setting__active-buttons">
         <button class="start" type="submit">Start</button>
@@ -42,6 +47,10 @@
         <div class="progress-number">00 : 00</div>
       </div>
 
+    </div>
+
+    <div class="timer">
+      <div class="mask"></div>
     </div>
   </main>
   

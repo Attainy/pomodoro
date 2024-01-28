@@ -6,6 +6,8 @@ html, body, main {
   --clockBorder: black;
   --clockBackGround: white;
   --lastHandColor: red;
+  --startButtonColor: #fa5a5a;
+  --startButtonShadow: #E04342;
 }
 
 /* header */
@@ -16,13 +18,13 @@ h1 {
 /* 타이머 세팅 */
 .setting {
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  gap: 1rem;
   padding-bottom: 2rem;
 }
 
-.setting__time-butons {
+.setting__time {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,20 +32,46 @@ h1 {
   padding-bottom: 1rem;
 }
 
+.setting__time-input input {
+  width: 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1rem;
+  text-align: center;
+}
+
+input[type=number]::-webkit-outer-spin-button{-webkit-appearance: none;margin: 0;}
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance: none;margin: 0;}
+
 button {
-  background-color: #fa5a5a;
+  background-color: var(--startButtonColor);
   color: white;
   margin: 5px;
   padding: 8px 18px;  
-  font-size: 14px;
-  box-shadow:0px 4px 0px #E04342;
+  font-size: 1.2rem;
+  box-shadow:0px 4px 0px var(--startButtonShadow);
   border: none;
   border-radius: 14px;
   cursor: pointer;
 }
 
+.start {
+  padding: 1rem 2rem;;
+}
+
+.reset {
+  background-color: #f0d264;
+  box-shadow:0px 4px 0px #D1B757;
+  padding: 1rem 2rem;;
+}
+
+.up-0, .up-5, .up-10, .up-15 {
+  background-color: #82c8a0;
+  box-shadow:0px 4px 0px #87a86f;
+}
+
 button:active {
-  box-shadow: 0 0 #ff4c4b; background-color: #ff4c4b;
+  box-shadow: 0 0 var(--startButtonColor); background-color: var(--startButtonColor);
 }
 
 .ani-stop {
@@ -131,6 +159,7 @@ button:active {
   position: absolute;
   border-radius: 50%;
   background-color: pink;
+  cursor: pointer;
 
   display: flex;
   justify-content: center;
@@ -138,4 +167,64 @@ button:active {
   font-size: 2.5rem;
   font-weight: bold;
   z-index: 7;
+}
+
+
+/* Test */
+.timer {
+  background: -webkit-linear-gradient(left, skyBlue 50%, #eee 50%);
+  /* background: -webkit-linear-gradient(left, #eee 50%, skyBlue 50%); */
+  /* Foreground color, Background colour */
+  border-radius: 100%;
+  height: 100px;
+  /* Height and width */
+  position: relative;
+  width: 100px;
+  /* Height and width */
+  animation-name: time;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  /* animation-iteration-count: infinite; */
+}
+.mask {
+  border-radius: 100% 0 0 100% / 50% 0 0 50%;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 50%;
+ 
+  animation-name: mask;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  /* animation-iteration-count: infinite; */
+  /* Animation time and number of steps (halved) */
+  -webkit-transform-origin: 100% 50%;
+}
+@-webkit-keyframes time {
+  100% {
+      -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes mask {
+  0% {
+      background: #eee;
+      /* Background colour */
+      -webkit-transform: rotate(0deg);
+  }
+  50% {
+      background: #eee;
+      /* Background colour */
+      -webkit-transform: rotate(-180deg);
+  }
+  50.01% {
+      background: skyBlue;
+      /* Foreground colour */
+      -webkit-transform: rotate(0deg);
+  }
+  100% {
+      background: skyBlue;
+      /* Foreground colour */
+      -webkit-transform: rotate(-180deg);
+  }
 }

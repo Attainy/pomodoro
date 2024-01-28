@@ -9,8 +9,52 @@ for (let i=0; i<60; i++) {
 }
 
 /* =========== 타이머 설정 =========== */
+let startTime = 0;
+
+const setTimeInput = document.querySelector('.setting__time-input input');
+const plusValue0 = document.querySelector('.up-0');
+const plusValue5 = document.querySelector('.up-5');
+const plusValue10 = document.querySelector('.up-10');
+const plusValue15 = document.querySelector('.up-15');
+
+// 시간 조건
+const timeCondition = (startTime) => {
+  if (startTime > 60) {
+    setTimeInput.focus();
+    return 60;
+  } else if (startTime < 0) {
+    setTimeInput.focus();
+    return 0;
+  } else {
+    return startTime
+  }
+}
 
 
+setTimeInput.addEventListener('change', function(event) {
+  startTime = timeCondition(startTime);
+  startTime = event.target.value;
+})
+
+plusValue0.addEventListener('click', function() {
+  startTime = 0;
+  setTimeInput.value = startTime;
+})
+plusValue5.addEventListener('click', function() {
+  startTime += 5;
+  startTime = timeCondition(startTime);
+  setTimeInput.value = startTime;
+})
+plusValue10.addEventListener('click', function() {
+  startTime += 10;
+  startTime = timeCondition(startTime);
+  setTimeInput.value = startTime;
+})
+plusValue15.addEventListener('click', function() {
+  startTime += 15;
+  startTime = timeCondition(startTime);
+  setTimeInput.value = startTime;
+})
 
 /* =========== 진행 표시하기 =========== */
 const progressBar = document.querySelector('.progress__bar');
@@ -21,8 +65,8 @@ const startStopButton = document.querySelector('.setting__active-buttons button:
 
 // 시간
 let selectTime = 'min' // 'sec'
-let inputTime = 40;
-let remainTime = selectTime === 'min' ? 60 * inputTime : inputTime;
+// let remainTime = selectTime === 'min' ? 60 * startTime : startTime;
+let remainTime = 60 * startTime;
 let second = 0;
 
 // 진행 여부
@@ -48,36 +92,43 @@ const markProgressNumber = (remainTime) => {
   progressNumber.innerText = `${remainMin.padStart(2, '0')} : ${remianSec.padStart(2, '0')}`;
 }
 
-
-
-/* =========== 이벤트 리스너 =========== */
+// 시작 또는 중지 버튼
 const startProgress = () => {
-  markProgressNumber(remainTime);
-  markProgressBar();
-  isStart = !isStart;
-
-  if (isStart) {
-    startStopButton.innerHTML = 'STOP';
-    // 1초마다 실행
-    let progressInterval = setInterval(function () {
-      // progress-hand 마지막 요소 없애기
-      let lastEl = document.querySelector('.progress__hand:last-child');
-      lastEl.remove();
-
-      // progress-number 시간 표시 하기
-      markProgressNumber(remainTime);
-
-      remainTime--;
-      if (remainTime === 0) clearInterval(progressInterval);
-    }, 1000);
-
-    
-  } else {
-    startStopButton.innerHTML = 'START';
-    clearInterval(progressInterval)
+  console.log('starTime', startTime, remainTime);
+  if (startTime === 0) {
+    alert("0보다 큰 수를 입력하세요.");
+    setTimeInput.focus();
+  } 
+  else {
+    remainTime = 60 * startTime;
+    markProgressNumber(remainTime);
+    markProgressBar();
+    isStart = !isStart;
+  
+    if (isStart) {
+      startStopButton.innerHTML = 'STOP';
+      // 1초마다 실행
+      let progressInterval = setInterval(function () {
+        // progress-hand 마지막 요소 없애기
+        let lastEl = document.querySelector('.progress__hand:last-child');
+        lastEl.remove();
+  
+        // progress-number 시간 표시 하기
+        markProgressNumber(remainTime);
+  
+        remainTime--;
+        if (remainTime === 0) clearInterval(progressInterval);
+      }, 1000);
+  
+      
+    } else {
+      startStopButton.innerHTML = 'START';
+      clearInterval(progressInterval)
+    }
   }
 
 }
 
 startStopButton.addEventListener('click', startProgress);
+progressNumber.addEventListener('click', startProgress);
 
