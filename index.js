@@ -79,6 +79,7 @@ const markProgressBar = () => {
   for (let sec=0; sec<remainTime; sec++) {
     const progressHand = document.createElement('div');
     progressHand.classList.add('progress__hand');
+
     // selectTime === 'min'이면 1초에 0.1도, selectTime === 'sec'이면 1초에 6도
     progressHand.style.transform = `rotate(${0.1 * sec}deg)`; // 초는 6, 분은 0.1
     progressBar.appendChild(progressHand);
@@ -95,16 +96,21 @@ const markProgressNumber = (remainTime) => {
 // 시작 또는 중지 버튼
 const startProgress = () => {
   console.log('starTime', startTime, remainTime);
+
+  // 시간값이 0일 때
   if (startTime === 0) {
     alert("0보다 큰 수를 입력하세요.");
     setTimeInput.focus();
   } 
+
+  // 시간값이 0보다 클 때
   else {
     remainTime = 60 * startTime;
     markProgressNumber(remainTime);
     markProgressBar();
     isStart = !isStart;
   
+    // Start 버튼
     if (isStart) {
       startStopButton.innerHTML = 'STOP';
       // 1초마다 실행
@@ -117,13 +123,14 @@ const startProgress = () => {
         markProgressNumber(remainTime);
   
         remainTime--;
-        if (remainTime === 0) clearInterval(progressInterval);
+        if (remainTime === 0 || !isStart) clearInterval(progressInterval);
       }, 1000);
-  
-      
-    } else {
+    } 
+    
+    // Stop 버튼
+    else {
       startStopButton.innerHTML = 'START';
-      clearInterval(progressInterval)
+      isStart = !isStart;
     }
   }
 
