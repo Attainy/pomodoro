@@ -10,6 +10,8 @@ html, body, main {
   --startButtonShadow: #E04342;
 }
 
+
+
 /* header */
 h1 {
   text-align: center;
@@ -226,5 +228,35 @@ button:active {
       background: skyBlue;
       /* Foreground colour */
       -webkit-transform: rotate(-180deg);
+  }
+}
+
+
+@media (max-width: 400px) {
+  .setting__time {
+    gap: 0.4rem;
+  }
+  .setting__time button {
+    width: 3.5rem;
+    font-size: 1rem;
+  }
+
+  .setting__active-buttons button {
+    width: 6rem;
+    font-size: 1.2rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .setting input {
+    padding: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .clock {
+    width: 90%;
+  }
+
+  .progress-number {
+    font-size: 1.2rem;
   }
 }
